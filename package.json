@@ -11,7 +11,8 @@
     "lint": "next lint",
     "code:check": "eslint ./src --ext .ts,.tsx --report-unused-disable-directives --max-warnings=0",
     "code:format": "eslint ./src --ext .ts,.tsx --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "postbuild": "next-sitemap --config next-sitemap.config.js"
   },
   "dependencies": {
     "next": "13.4.4",
