@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "amazonwebservices.aws-toolkit-vscode",
+    "EditorConfig.EditorConfig",
+    "dbaeumer.vscode-eslint",
+    "ms-vscode.vscode-typescript-next",
+    "esbenp.prettier-vscode",
+    "formulahendry.auto-rename-tag",
+    "mrmlnc.vscode-duplicate",
+    "VisualStudioExptTeam.vscodeintellicode"
+  ]
+}

@@ -1,0 +1,72 @@
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - develop
+      - staging
+      - main
+
+jobs:
+  Deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Check Node and Setup .npmrc
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: AWS credentials
+        if: github.ref == 'refs/heads/develop'
+        uses: deyvisonborges/github-actions/aws-configure@main
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEV }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEV }}
+
+      - name: AWS credentials
+        if: github.ref == 'refs/heads/staging'
+        uses: deyvisonborges/github-actions/aws-configure@main
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_STG }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_STG }}
+
+      - name: AWS credentials
+        if: github.ref == 'refs/heads/main'
+        uses: deyvisonborges/github-actions/aws-configure@main
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_PRD }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_PRD }}
+
+      - name: Install dependencies
+        run: npm install
+      
+      - name: Install esbuild
+        run: npm i -g esbuild
+
+      - name: Send 'start deploy' notification
+        if: github.ref == 'refs/heads/main'
+        uses: archive/github-actions-slack@v2.6.0
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_NOBOT_TOKEN }}
+          slack-channel: ${{ secrets.SLACK_DEPLOY_CHANNEL_ID }}
+          slack-text: ":arrow_forward: Iniciando Deploy do *${{ github.repository }}*"
+
+      - name: Deploy
+        run: npm run deploy
+
+        env:
+          AWS_REGION: "us-east-1"
+
+      - name: Send 'finish deploy' notification
+        if: github.ref == 'refs/heads/main'
+        uses: archive/github-actions-slack@v2.6.0
+        with:
+          slack-bot-user-oauth-access-token: ${{ secrets.SLACK_NOBOT_TOKEN }}
+          slack-channel: ${{ secrets.SLACK_DEPLOY_CHANNEL_ID }}
+          slack-text: ":ok: Finalizado Deploy do *${{ github.repository }}* :rocket:"
