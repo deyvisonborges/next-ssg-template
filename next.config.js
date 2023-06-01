@@ -1,6 +1,12 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+/* eslint-disable @typescript-eslint/no-var-requires */
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
 
-module.exports = nextConfig
+module.exports = withBundleAnalyzer({
+  distDir: 'build',
+  images: { unoptimized: true },
+  output: 'export',
+  poweredByHeader: false,
+  reactStrictMode: true
+})
