@@ -12,7 +12,9 @@
     "code:check": "eslint ./src --ext .ts,.tsx --report-unused-disable-directives --max-warnings=0",
     "code:format": "eslint ./src --ext .ts,.tsx --fix",
     "prepare": "husky install",
-    "postbuild": "next-sitemap --config next-sitemap.config.js"
+    "postbuild": "next-sitemap --config next-sitemap.config.js",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "next": "13.4.4",
@@ -23,6 +25,13 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.4.4",
+    "@storybook/addon-essentials": "^7.0.23",
+    "@storybook/addon-interactions": "^7.0.23",
+    "@storybook/addon-links": "^7.0.23",
+    "@storybook/blocks": "^7.0.23",
+    "@storybook/nextjs": "^7.0.23",
+    "@storybook/react": "^7.0.23",
+    "@storybook/testing-library": "^0.0.14-next.2",
     "@types/axios": "^0.14.0",
     "@types/node": "^20.2.5",
     "@types/react": "18.2.7",
@@ -39,10 +48,12 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
+    "eslint-plugin-storybook": "^0.6.12",
     "husky": "^8.0.0",
     "lint-staged": "^13.2.2",
     "postcss": "^8.4.24",
     "prettier": "^2.8.8",
+    "storybook": "^7.0.23",
     "tailwindcss": "^3.3.2",
     "typescript": "5.0.4"
   }

@@ -4,6 +4,7 @@
     "es2021": true,
     "node": true
   },
+  "ignorePatterns": ["!.storybook"],
   "settings": {
     "react": {
       "version": "detect"
@@ -15,7 +16,8 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "next",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
