@@ -1,15 +1,17 @@
+import { AppConfig } from '@/app.config'
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
-  title: '',
-  description: '',
+  title: AppConfig.title,
+  description: AppConfig.description,
   canonical: '',
   openGraph: {
     type: 'website',
-    locale: 'pt_BR',
+    locale: AppConfig.locale,
     url: '',
-    siteName: '',
-    title: '',
-    description: '',
+    siteName: AppConfig.site_name,
+    title: AppConfig.title,
+    description: AppConfig.description,
     images: [
       {
         url: '/assets/seo/banner.jpg',
