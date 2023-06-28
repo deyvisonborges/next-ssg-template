@@ -8,5 +8,9 @@ module.exports = withBundleAnalyzer({
   images: { unoptimized: true },
   output: 'export',
   poweredByHeader: false,
-  reactStrictMode: true
+  reactStrictMode: true,
+  compiler: {
+    // Enables the styled-components SWC transform
+    styledComponents: true
+  }
 })
